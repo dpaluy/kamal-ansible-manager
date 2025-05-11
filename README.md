@@ -22,25 +22,30 @@ The playbook also:
 
 ## Getting Started
 
+Install ansible
+```bash
+brew install ansible
+```
+
 Clone the repo:
 ```bash
-$ git clone git@github.com:guillaumebriday/kamal-ansible-manager.git
-$ cd kamal-ansible-manager
+git clone git@github.com:dpaluy/kamal-ansible-manager.git
+cd kamal-ansible-manager
 ```
 
 Copy the inventory example file:
 ```bash
-$ cp hosts.ini.example hosts.ini
+cp hosts.ini.example hosts.ini
 ```
 
 Update the `<host1>` with your server's IP address (you can have multiple servers):
 ```bash
-$ vim hosts.ini
+vim hosts.ini
 ```
 
 Install the requirements:
 ```bash
-$ ansible-galaxy install -r requirements.yml
+ansible-galaxy install -r requirements.yml
 ```
 
 ## Configuring vars
@@ -49,6 +54,7 @@ Variables can be configured in the `playbook.yml` file.
 Also, you can override default variables provided in [geerlingguy/ansible-role-swap](https://github.com/geerlingguy/ansible-role-swap/blob/master/defaults/main.yml) to adjust the swap settings.
 
 For instance:
+
 ```yml
   vars:
     security_autoupdate_reboot: "true"
@@ -59,25 +65,10 @@ For instance:
 ## Running the playbook
 
 Run the playbook:
+
 ```bash
-$ ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i hosts.ini playbook.yml
+ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i hosts.ini playbook.yml
 ```
-
-## Provisioning Servers with Scaleway (Optional)
-
-If you want to automatically create new compute instances on Scaleway, you can use the [community.general.scaleway_compute module](https://docs.ansible.com/ansible/latest/collections/community/general/scaleway_compute_module.html). Follow these steps:
-
-Copy the example variables file and adjust the variables as needed:
-```bash
-$ cp roles/scaleway/vars/main.yml.example roles/scaleway/vars/main.yml
-```
-
-Run the playbook:
-```bash
-$ ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook scaleway.yml
-```
-
-Then, it will continue the provisioning process on the newly created servers.
 
 ## Contributing
 
